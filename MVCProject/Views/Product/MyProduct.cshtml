@@ -1,0 +1,42 @@
+﻿@using EntityLayer.Concrete
+@model List<Product>
+@{
+    ViewBag.Title = "MyProduct";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+<div class="container-fluid mt-4">
+    <div class="card">
+        <div class="card-body">
+            <h2>Ürünlerim</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">İsmi</th>
+                        <th scope="col">Fiyatı</th>
+                        <th scope="col">Stok Adedi</th>
+                        <th scope="col">Kategori Id</th>
+                        <th scope="col">Görsel yolu</th>
+                        <th scope="col">Düzenle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.Id</th>
+                            <td>@item.Name</td>
+                            <td>@item.UnitPrice</td>
+                            <td>@item.UnitsInStock</td>
+                            <td>@item.CategoryId</td>
+                            <td>@item.ImageFile</td>
+                            <td><a class="btn btn-primary" href="/product/edit/@item.Id">Düzenle</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

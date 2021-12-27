@@ -1,0 +1,13 @@
+﻿@using EntityLayer.Concrete
+@model List<Product>
+@{ ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<h2>List</h2>
+
+@foreach (var item in Model)
+{
+<div>
+    <p>  @item.Name  </p>
+    <a href="/Product/edit/@item.Id">edit</a>
+</div>}
