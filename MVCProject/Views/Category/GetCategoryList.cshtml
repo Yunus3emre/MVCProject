@@ -1,29 +1,22 @@
 ﻿@using EntityLayer.Concrete
 @model List<Category>
-@{
-    Layout = null;
-}
-<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-
-
-<table class="table table-bordered">
-    <tr>
-        <th>ID</th>
-        <th>Ad</th>
-        <th>Açıklama</th>        
-        <th>Düzenle</th>        
-        <th>Ürünleri Listele</th>        
-    </tr>
-    @foreach(var i in Model)
-    {
-        <tr>
-            <td>@i.Id</td>
-            <td>@i.Name</td>
-            <td>@i.Description</td>            
-            <td><a href="/category/edit/@i.Id">edit</a>    </td>            
-            <td><a href="/Product/GetlistbyCategoryId/@i.Id">Ürünleri Listele</a>    </td>            
+@{ Layout = "~/Views/Shared/_DashboardLayout.cshtml"; }
+<div class="container mt-5">
+    <table class="table table-bordered">
+        <tr>            
+            <th>Ad</th>
+            <th>Açıklama</th>
+            <th>Düzenle</th>
+            <th>Ürünleri Listele</th>
         </tr>
-    }
-</table>
-<br />
-<a href="/Category/AddCategory" class="btn btn-info">Yeni Kategori   </a>
+        @foreach (var i in Model)
+        {
+<tr>    
+    <td>@i.Name</td>
+    <td>@i.Description</td>
+    <td><a href="/category/edit/@i.Id">edit</a>    </td>
+    <td><a href="/Product/GetlistbyCategoryId/@i.Id">Ürünleri Listele</a>    </td>
+</tr>
+}
+    </table>
+</div>

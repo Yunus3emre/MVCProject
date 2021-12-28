@@ -42,9 +42,9 @@ namespace MVCProject.Controllers
         [Authorize]
         public ActionResult AddByUser(Product p)
         {
-            var UserMail = HttpContext.User.Identity.Name;
-            var User = us.GetByMail(UserMail);
-            var userIdProductAdded = User.Id;
+            var userMail = HttpContext.User.Identity.Name;
+            var user = us.GetByMail(userMail);
+            var userIdProductAdded = user.Id;
             p.UserId = userIdProductAdded;
             pm.ProductAddBL(p);
             return RedirectToAction("AddByUser", "product");
@@ -53,8 +53,14 @@ namespace MVCProject.Controllers
         [Authorize]
         public ActionResult Edit(int id)
         {
+            var userMail = HttpContext.User.Identity.Name;
+            var user = us.GetByMail(userMail);
             var value = pm.GetByID(id);
-            return View(value);
+            if (user.Id==value.UserId || userMail == "admin@admin.com")
+            {
+                return View(value);
+            }
+            return RedirectToAction("index", "product");
         }
         [HttpPost]
         [Authorize]
@@ -63,6 +69,7 @@ namespace MVCProject.Controllers
             pm.ProductUpdateBL(p);
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "Admin")]
         public ActionResult AllProduct()
         {            
             return View();

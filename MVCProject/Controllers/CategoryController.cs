@@ -18,19 +18,22 @@ namespace MVCProject.Controllers
         CategoryManager cm = new CategoryManager(new EfCategoryDal());
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("index", "product");
         }
+        [Authorize(Roles = "Admin")]
         public ActionResult GetCategoryList()
         {
             var categoryvalues = cm.GetList();
             return View(categoryvalues);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")] 
         public ActionResult AddCategory()
         {
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult AddCategory(Category c)
         {            
             CategoryValidator categoryValidator = new CategoryValidator();
@@ -50,12 +53,14 @@ namespace MVCProject.Controllers
             return View();
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             var value = cm.GetByID(id);
             return View(value);
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(Category c)
         {
             cm.CategoryUpdateBL(c);
