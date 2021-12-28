@@ -16,6 +16,7 @@
                         <th>Stok</th>
                         <th>Kategory</th>
                         <th>User</th>
+                        <th></th>
                     </tr>
                 </thead>
             </table>
@@ -50,6 +51,11 @@
                     { "data": "UnitsInStock", "name": "UnitsInStock", "autoWith": true },
                     { "data": "CategoryId", "name": "CategoryId", "autoWith": true },
                     { "data": "UserId", "name": "UserId", "autoWith": true },
+                    {
+                        "data": "Id", "render": function (data) {
+                            return '<a class="btn btn-outline-primary" href=" /product/edit/' + data + '" target="_blank">Detay</a>';
+                        }
+                    }
                     
                 ],
             });
